@@ -1,0 +1,7 @@
+<resources>
+    <string name="app_name">Ex9</string>
+    <string name="num">Enter phone Number :</string>
+    <string name="search">Enter URL :</string>
+    <string name="lo">Longitude</string>
+    <string name="la">Latitude</string>
+</resources>
