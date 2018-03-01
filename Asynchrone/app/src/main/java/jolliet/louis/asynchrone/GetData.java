@@ -15,7 +15,7 @@ class GetData extends AsyncTask<String, String, String> {
     @Override
     protected String doInBackground(String... uri) {
         String responseString = "";
-        URL url=null;
+        URL url;
         StringBuilder response = new StringBuilder();
         try {
             url = new URL(uri[0]);
@@ -39,5 +39,4 @@ class GetData extends AsyncTask<String, String, String> {
     protected void onPostExecute(String result) {
         super.onPostExecute(result);
     }
-//Do anything with response..//
 }

@@ -7,23 +7,54 @@
     tools:context="jolliet.louis.asynchrone.MainActivity">
 
     <LinearLayout
-        android:layout_width="368dp"
-        android:layout_height="231dp"
+        android:layout_width="match_parent"
+        android:layout_height="357dp"
         android:orientation="vertical"
         tools:layout_editor_absoluteX="8dp"
         tools:layout_editor_absoluteY="8dp">
 
-        <TextView
-            android:id="@+id/result"
+        <EditText
+            android:id="@+id/Ville"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="TextView" />
+            android:ems="10"
+            android:inputType="textPersonName"
+            android:text="@string/Ville" />
+
+        <Spinner
+            android:id="@+id/Spinner"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
         <Button
-            android:id="@+id/Meteo"
+            android:id="@+id/Search"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:text="Meteo" />
+            android:text="@string/button_comptent" />
+
+        <TextView
+            android:id="@+id/Temperature"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/Description"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
+
+        <ImageView
+            android:id="@+id/Icon"
+            android:layout_width="match_parent"
+            android:layout_height="94dp"
+            android:minHeight="300px"
+            android:minWidth="00px" />
+
+        <Button
+            android:id="@+id/Delete"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/Delete" />
+
     </LinearLayout>
 
 </LinearLayout>
