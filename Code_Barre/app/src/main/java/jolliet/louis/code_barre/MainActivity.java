@@ -32,9 +32,6 @@ public class MainActivity extends AppCompatActivity {
     private static final String STATE_LANG = "LANG";
     private static final String STATE_COVER = "COVER";
     private static final String STATE_EDITOR = "EDIT";
-    private static final String STATE_ASIN = "ASIN";
-    private static final String STATE_COL = "COL";
-
 
     Button scan;
     TextView titre;
@@ -67,7 +64,7 @@ public class MainActivity extends AppCompatActivity {
         editeur = findViewById(R.id.EditeurValue);
         auteurs = findViewById(R.id.AuteurValue);
         collection = findViewById(R.id.CollectionValue);
-        asin = findViewById(R.id.AsinValue);
+        asin = findViewById(R.id.AsinValue)                ;
         spinner = findViewById(R.id.Spinner);
         final MainActivity that = this;
 
@@ -121,11 +118,8 @@ public class MainActivity extends AppCompatActivity {
         String publisher = volumeInfo.getString("publisher");
         editeur.setText(publisher);
 
-        String colection = volumeInfo.getString("collection");
-        collection.setText(colection);
 
-        String ASIN = volumeInfo.getString("ASIN");
-        asin.setText(ASIN);
+
 
         String language = volumeInfo.getString("language");
         langue.setText(language);
@@ -139,8 +133,8 @@ public class MainActivity extends AppCompatActivity {
 
         String publishedDate = volumeInfo.getString("publishedDate");
         annee.setText(publishedDate);
-
         JSONArray authors = volumeInfo.getJSONArray("authors");
+
         ArrayList<String> listdata = new ArrayList<>();
         if (authors != null) {
             for (int i=0;i<authors.length();i++){
@@ -151,6 +145,8 @@ public class MainActivity extends AppCompatActivity {
         for(String a : listdata)
             if(finalAuthors!="")
                 finalAuthors= finalAuthors+","+a;
+            else
+                finalAuthors = a;
 
         auteurs.setText(finalAuthors);
 
@@ -170,8 +166,6 @@ public class MainActivity extends AppCompatActivity {
         // Save the user's current game state
         savedInstanceState.putString(STATE_YEAR, annee.getText().toString());
         savedInstanceState.putString(STATE_LANG, langue.getText().toString());
-        savedInstanceState.putString(STATE_ASIN, asin.getText().toString());
-        savedInstanceState.putString(STATE_COL, collection.getText().toString());
         savedInstanceState.putString(STATE_TITLE, titre.getText().toString());
         savedInstanceState.putString(STATE_AUTEUR, auteurs.getText().toString());
         savedInstanceState.putString(STATE_EDITOR, editeur.getText().toString());
@@ -188,14 +182,12 @@ public class MainActivity extends AppCompatActivity {
 
 
         // Restore state members from saved instance
-        editeur.setText(savedInstanceState.getString(STATE_EDITOR));
-        annee.setText(savedInstanceState.getString(STATE_YEAR));
-        collection.setText(savedInstanceState.getString(STATE_COL));
-        asin.setText(savedInstanceState.getString(STATE_ASIN));
-        titre.setText(savedInstanceState.getString(STATE_TITLE));
-        langue.setText(savedInstanceState.getString(STATE_LANG));
-        auteurs.setText(savedInstanceState.getString(STATE_AUTEUR));
-        String urlState = savedInstanceState.getString(STATE_COVER);
+        editeur.setText(savedInstanceState.getString(STATE_EDITOR,""));
+        annee.setText(savedInstanceState.getString(STATE_YEAR,""));
+        titre.setText(savedInstanceState.getString(STATE_TITLE,""));
+        langue.setText(savedInstanceState.getString(STATE_LANG,""));
+        auteurs.setText(savedInstanceState.getString(STATE_AUTEUR,""));
+        String urlState = savedInstanceState.getString(STATE_COVER,"");
         GetBookCover gc = new GetBookCover();
         try {
             cover.setImageBitmap(gc.execute(urlState).get());
