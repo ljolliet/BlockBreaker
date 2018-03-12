@@ -1,0 +1,51 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:background="@mipmap/background"
+    android:orientation="vertical"
+    tools:context="jolliet.louis.blockbreaker.MainActivity">
+
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="319dp"
+        android:orientation="vertical">
+
+
+        <TextView
+            android:id="@+id/appName"
+            android:layout_width="match_parent"
+            android:layout_height="331dp"
+            android:fontFamily="@font/game"
+            android:gravity="center"
+            android:text="@string/game_name"
+            android:textSize="70dp" />
+    </LinearLayout>
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <RatingBar
+            android:id="@+id/ratingBar"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:theme="@style/MyRatingBar"
+            android:layout_gravity="center_horizontal"
+            android:numStars="5"
+            android:rating="2"
+            />
+
+        <Button
+            android:id="@+id/buttonPlay"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:text="@string/buttonPlay"
+            android:theme="@style/PlayButton"
+            />
+
+    </LinearLayout>
+</LinearLayout>

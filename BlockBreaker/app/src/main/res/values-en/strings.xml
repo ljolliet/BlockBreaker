@@ -1,0 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">BlockBreaker</string>
+    <string name="buttonPlay">Play</string>
+    <string name="game_name">BLOCK BREAKER</string>
+</resources>

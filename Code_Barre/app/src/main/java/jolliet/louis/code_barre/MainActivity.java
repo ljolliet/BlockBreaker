@@ -91,8 +91,8 @@ public class MainActivity extends AppCompatActivity {
             } else {
                 Toast.makeText(this, "Scanned: " + result.getContents(), Toast.LENGTH_LONG).show();
                 GetData gt = new GetData();
-                //String s = "https://www.googleapis.com/books/v1/volumes?q=isbn:"+result.getContents();
-                String s = "https://www.googleapis.com/books/v1/volumes?q=isbn:9787508508405";
+                String s = "https://www.googleapis.com/books/v1/volumes?q=isbn:"+result.getContents();
+                //String s = "https://www.googleapis.com/books/v1/volumes?q=isbn:9787508508405";
                 String jsonData = null;
                 try {
                     jsonData = gt.execute(s).get();
