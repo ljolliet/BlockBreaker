@@ -26,7 +26,7 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                intent.putExtra(STARS, ratingBar.getRating());
+                intent.putExtra(STARS, Math.floor(ratingBar.getRating()));
                 startActivity(intent);
             }
 
