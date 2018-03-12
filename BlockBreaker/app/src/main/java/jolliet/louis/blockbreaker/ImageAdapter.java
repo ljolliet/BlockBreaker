@@ -4,9 +4,7 @@ import android.content.Context;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
-import android.widget.GridView;
 import android.widget.ImageView;
-import android.widget.ListAdapter;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -19,140 +17,9 @@ import java.util.Random;
 class ImageAdapter extends BaseAdapter {
 
     private Context mContext;
-    private Integer[] mThumbIds={ R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4,
-            R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4
-    };
-    private List<Integer> l = new ArrayList();
+    private Integer[] colorBlocks={ R.drawable.tuile1,R.drawable.tuile2,R.drawable.tuile3,R.drawable.tuile4 };
+    private Integer whiteBlock = R.drawable.tuile0;
+    private List<Integer> blockList = new ArrayList();
 
 
     public ImageAdapter(Context c) {
@@ -160,7 +27,7 @@ class ImageAdapter extends BaseAdapter {
     }
 
     public int getCount() {
-        return mThumbIds.length;
+        return blockList.size();
     }
 
     public Object getItem(int position) {
@@ -184,24 +51,22 @@ class ImageAdapter extends BaseAdapter {
             imageView = (ImageView) convertView;
         }
 
-
-
-
-        Random r = new Random();
-        int valeur;
-        for(int i=0;i<mThumbIds.length;i++){
-            valeur = r.nextInt(4 - 0);
-            l.add(mThumbIds[valeur]);
-        };
-
-
-
-
-
-        imageView.setImageResource(l.get(position));
+        imageView.setImageResource(blockList.get(position));
         return imageView;
     }
 
 
+    public void createArray(int numColumn) {
+        Random r = new Random();
+        int nbBlock = (int) Math.pow(numColumn,2);
+        int valeur;
+        for(int i=0;i<nbBlock;i++){
+            valeur = r.nextInt(4 - 0);
+            blockList.add(colorBlocks[valeur]);
+        };
+    }
 
+    public void setBlockClicked(int blockClicked) {
+        blockList.set(blockClicked,whiteBlock);
+    }
 }

@@ -11,7 +11,8 @@ import android.widget.Toast;
 public class GameActivity extends AppCompatActivity {
 
     private static final String STARS = "STARS";
-    int numstars=5;
+    int numStars =1;
+    int numColumn = 5;
     GridView gridview;
 
     @Override
@@ -21,17 +22,21 @@ public class GameActivity extends AppCompatActivity {
 
         Intent intent = getIntent();
         if (intent != null) {
-             //numstars = Integer.parseInt(intent.getStringExtra(STARS));
+            String l = intent.getStringExtra(STARS);
+            numStars = Integer.parseInt(l);
+            numColumn = 5*numStars;
         }
-         gridview = findViewById(R.id.gridview);
-        gridview.setNumColumns(5*numstars);
-        gridview.setAdapter(new ImageAdapter(this));
+        gridview = findViewById(R.id.gridview);
+        gridview.setNumColumns(numColumn);
+        final ImageAdapter adaptater = new ImageAdapter(this);
+        adaptater.createArray(numColumn);
+        gridview.setAdapter(adaptater);
 
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GameActivity.this, "" + position,
-                        Toast.LENGTH_SHORT).show();
+                Toast.makeText(GameActivity.this, "" + position,Toast.LENGTH_SHORT).show();
+                adaptater.setBlockClicked(position);
             }
 
         });

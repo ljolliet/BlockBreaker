@@ -26,7 +26,9 @@ public class MainActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 Intent intent = new Intent(MainActivity.this, GameActivity.class);
-                intent.putExtra(STARS, Math.floor(ratingBar.getRating()));
+                float a = ratingBar.getRating();
+                int b  = Math.round(a);
+                intent.putExtra(STARS, String.valueOf(Math.round(a)));
                 startActivity(intent);
             }
 
