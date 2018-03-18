@@ -68,7 +68,7 @@ class ImageAdapter extends BaseAdapter {
     }
 
     public void setBlockClicked(int blockClicked) {
-        blockList.set(blockClicked, null);
+        blockList.set(blockClicked, R.drawable.tuile0);
     }
 
     public int getColor(int position) {
@@ -89,6 +89,31 @@ class ImageAdapter extends BaseAdapter {
             }
         else
             return -1;
-
     }
+
+    public void setColor(int position, int color) {
+        int col = -1;
+        switch (color) {
+            case 0:
+                col = R.drawable.tuile0;
+                break;
+            case 1:
+                col = R.drawable.tuile1;
+                break;
+            case 2:
+                col = R.drawable.tuile2;
+                break;
+            case 3:
+                col = R.drawable.tuile3;
+                break;
+            case 4:
+                col = R.drawable.tuile4;
+                break;
+            default:
+                col = -1;
+                break;
+        }
+        blockList.set(position, col);
+    }
+
 }

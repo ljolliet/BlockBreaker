@@ -9,11 +9,15 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 import android.widget.Toast;
 
+import java.util.ArrayList;
+import java.util.List;
+
 public class GameActivity extends AppCompatActivity {
 
     private static final String STARS = "STARS";
     int numStars =1;
-    int numColumn = 5;
+    int numColumn = 10;
+    int currentNmColumn =10;
     GridView gridview;
 
     @Override
@@ -26,6 +30,7 @@ public class GameActivity extends AppCompatActivity {
             String l = intent.getStringExtra(STARS);
             numStars = Integer.parseInt(l);
             numColumn = 5*numStars;
+            currentNmColumn = numColumn;
         }
         gridview = findViewById(R.id.gridview);
         gridview.setNumColumns(numColumn);
@@ -47,17 +52,59 @@ public class GameActivity extends AppCompatActivity {
         System.out.println("_____________________________________________________________"+position+"_____________________________________________________________");
         int color = adapter.getColor(position);
         adapter.setBlockClicked(position);
-        if(color==adapter.getColor(position-1)) {
-            resultClick(position-1,adapter);
+        if(color!=0) {
+            if(position % numColumn != 0) {
+                if (color == adapter.getColor(position - 1)) {
+                    resultClick(position - 1, adapter);
+                }
+            }
+            if(position % numColumn != numColumn - 1) {
+                if (color == adapter.getColor(position + 1)) {
+                    resultClick(position + 1, adapter);
+                }
+            }
+            if(position>numColumn) {
+                if (color == adapter.getColor(position - numColumn)) {
+                    resultClick(position - numColumn, adapter);
+                }
+            }
+            if (position < Math.pow(numColumn, 2) - numColumn) {
+                if (color == adapter.getColor(position + numColumn)) {
+                    resultClick(position + numColumn, adapter);
+                }
+            }
+            gravity(position, adapter);
+            if(position >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position)==0)
+                offset(position,adapter);
+            adapter.notifyDataSetChanged();
         }
-        else if(color==adapter.getColor(position+1)) {
-            resultClick(position+1,adapter);
+    }
+
+    private void offset(int position,ImageAdapter adapter) {
+        if(position % numColumn != numColumn - 1 && position > 0 && position % numColumn != 0){
+            adapter.setColor(position, adapter.getColor(position + 1));
+            adapter.setColor(position+1, 0);
+            offset(position - numColumn, adapter);
+            adapter.notifyDataSetChanged();
+            if(position-1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position-1)==0)
+                offset(position-1,adapter);
+            if(position+1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position+1)==0) {
+                offset(position+1,adapter);
+            }
         }
-        else if(color==adapter.getColor(position-numColumn)) {
-            resultClick(position-numColumn,adapter);
+
+    }
+
+    private void gravity(int position,ImageAdapter adapter) {
+        if(position<numColumn)
+            adapter.setColor(position, 0);
+        else{
+            adapter.setColor(position,adapter.getColor(position-numColumn));
+            gravity(position-numColumn,adapter);
+            if(adapter.getColor(position)==0)
+                adapter.setColor(position,adapter.getColor(position-numColumn));
         }
-        else if(color==adapter.getColor(position+numColumn)) {
-            resultClick(position+numColumn,adapter);
-        }
+
+
     }
 }
