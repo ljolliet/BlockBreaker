@@ -1,29 +1,35 @@
 package jolliet.louis.blockbreaker;
 
+import android.app.Activity;
 import android.content.Intent;
+import android.content.pm.ActivityInfo;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.view.View;
-import android.widget.Adapter;
 import android.widget.AdapterView;
+import android.widget.Button;
 import android.widget.GridView;
+import android.widget.TextView;
 import android.widget.Toast;
-
-import java.util.ArrayList;
-import java.util.List;
 
 public class GameActivity extends AppCompatActivity {
 
     private static final String STARS = "STARS";
+    private static final String SCORE = "SCORE";
     int numStars =1;
     int numColumn = 10;
     int currentNmColumn =10;
     GridView gridview;
+    int score = 0;
+    TextView scoreTextview;
+    Button scoreButton;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_game);
+        setRequestedOrientation(ActivityInfo.SCREEN_ORIENTATION_PORTRAIT);
+
 
         Intent intent = getIntent();
         if (intent != null) {
@@ -33,52 +39,55 @@ public class GameActivity extends AppCompatActivity {
             currentNmColumn = numColumn;
         }
         gridview = findViewById(R.id.gridview);
+        scoreTextview = findViewById(R.id.scoreResult);
+        scoreButton = findViewById(R.id.scoreButton);
         gridview.setNumColumns(numColumn);
+
         final ImageAdapter adapter = new ImageAdapter(this);
         adapter.createArray(numColumn);
         gridview.setAdapter(adapter);
 
+        updateScore();
+
         gridview.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Toast.makeText(GameActivity.this, "" + position,Toast.LENGTH_SHORT).show();
-                resultClick(position,adapter);
+                resultClick(position,adapter,0, true);
             }
 
         });
+        scoreButton.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(GameActivity.this, ScoreActivity.class);
+                intent.putExtra(SCORE, String.valueOf(score));
+                startActivity(intent);
+            }
+        });
     }
 
-    private void resultClick(int position, ImageAdapter adapter) {
-        System.out.println("_____________________________________________________________"+position+"_____________________________________________________________");
+    private void resultClick(int position, ImageAdapter adapter,int num,boolean init) {
         int color = adapter.getColor(position);
-        adapter.setBlockClicked(position);
-        if(color!=0) {
-            if(position % numColumn != 0) {
-                if (color == adapter.getColor(position - 1)) {
-                    resultClick(position - 1, adapter);
+
+
+        if(color!=0)
+            if (init)
+            {
+                if (color == adapter.getColor(position - 1) || color == adapter.getColor(position + 1)
+                        || color == adapter.getColor(position - numColumn) || color == adapter.getColor(position + numColumn)){
+                    click(position, color, adapter, num);
+                }
+                else {
+                    score -= 100;
+                    updateScore();
                 }
             }
-            if(position % numColumn != numColumn - 1) {
-                if (color == adapter.getColor(position + 1)) {
-                    resultClick(position + 1, adapter);
-                }
-            }
-            if(position>numColumn) {
-                if (color == adapter.getColor(position - numColumn)) {
-                    resultClick(position - numColumn, adapter);
-                }
-            }
-            if (position < Math.pow(numColumn, 2) - numColumn) {
-                if (color == adapter.getColor(position + numColumn)) {
-                    resultClick(position + numColumn, adapter);
-                }
-            }
-            gravity(position, adapter);
-            if(position >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position)==0)
-                offset(position,adapter);
-            adapter.notifyDataSetChanged();
-        }
+            else
+                click(position, color, adapter,num);
+
+
     }
+
 
     private void offset(int position,ImageAdapter adapter) {
         if(position % numColumn != numColumn - 1 && position > 0 && position % numColumn != 0){
@@ -86,11 +95,10 @@ public class GameActivity extends AppCompatActivity {
             adapter.setColor(position+1, 0);
             offset(position - numColumn, adapter);
             adapter.notifyDataSetChanged();
-            if(position-1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position-1)==0)
-                offset(position-1,adapter);
-            if(position+1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position+1)==0) {
+            /*if(position-1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position-1)==0)
+                offset(position-1,adapter);*/
+            if(position+1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position+1)==0)
                 offset(position+1,adapter);
-            }
         }
 
     }
@@ -104,7 +112,38 @@ public class GameActivity extends AppCompatActivity {
             if(adapter.getColor(position)==0)
                 adapter.setColor(position,adapter.getColor(position-numColumn));
         }
-
-
+    }
+    private  void click(int position, int color, ImageAdapter adapter, int num){
+        adapter.setBlockClicked(position);
+        num++;
+        if (position % numColumn != 0) {
+            if (color == adapter.getColor(position - 1)) {
+                resultClick(position - 1, adapter, num, false);
+            }
+        }
+        if (position % numColumn != numColumn - 1) {
+            if (color == adapter.getColor(position + 1)) {
+                resultClick(position + 1, adapter, num, false);
+            }
+        }
+        if (position > numColumn) {
+            if (color == adapter.getColor(position - numColumn)) {
+                resultClick(position - numColumn, adapter, num, false);
+            }
+        }
+        if (position < Math.pow(numColumn, 2) - numColumn) {
+            if (color == adapter.getColor(position + numColumn)) {
+                resultClick(position + numColumn, adapter, num, false);
+            }
+        }
+        gravity(position, adapter);
+        if (position >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position) == 0)
+            offset(position, adapter);
+        adapter.notifyDataSetChanged();
+        score = score+(num*10);
+        updateScore();
+    }
+    private void updateScore(){
+        scoreTextview.setText(String.valueOf(score));
     }
 }

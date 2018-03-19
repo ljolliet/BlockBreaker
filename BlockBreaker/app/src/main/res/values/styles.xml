@@ -18,7 +18,7 @@
         <item name="colorAccent">#282727</item>
         <item name="android:colorControlNormal">#d4383634</item>
     </style>
-    <style name="PlayButton" parent="Widget.AppCompat.Button">
+    <style name="Button" parent="Widget.AppCompat.Button">
         <item name="android:colorButtonNormal">#282727</item>
         <item name="android:textColor">#c1b8ae</item>
     </style>
