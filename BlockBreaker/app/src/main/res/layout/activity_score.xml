@@ -8,14 +8,41 @@
     tools:context="jolliet.louis.blockbreaker.ScoreActivity">
 
 
+    <TextView
+        android:id="@+id/ScoreTextview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/game"
+        android:gravity="center"
+        android:text="@string/scores"
+        android:textSize="70dp" />
+
+    <TextView
+        android:id="@+id/LevelTextview"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:fontFamily="@font/game"
+        android:gravity="center"
+        android:text="@string/level"
+        android:textSize="50dp" />
+
     <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="319dp"
+        android:layout_height="305dp"
         android:orientation="vertical">
 
-        
 
-
+        <ListView
+            android:id="@+id/listView"
+            android:layout_width="match_parent"
+            android:layout_height="305dp" />
     </LinearLayout>
+
+    <Button
+        android:id="@+id/Return"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/retour"
+        android:theme="@style/Button"/>
 </LinearLayout>
 

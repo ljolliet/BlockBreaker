@@ -36,6 +36,7 @@
             android:theme="@style/MyRatingBar"
             android:layout_gravity="center_horizontal"
             android:numStars="5"
+            android:min="1"
             android:rating="2"
             android:stepSize="1"
             />

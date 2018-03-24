@@ -16,6 +16,7 @@ public class GameActivity extends AppCompatActivity {
 
     private static final String STARS = "STARS";
     private static final String SCORE = "SCORE";
+    private static final String LEVEL = "LEVEL";
     int numStars =1;
     int numColumn = 10;
     int currentNmColumn =10;
@@ -61,6 +62,7 @@ public class GameActivity extends AppCompatActivity {
             public void onClick(View v) {
                 Intent intent = new Intent(GameActivity.this, ScoreActivity.class);
                 intent.putExtra(SCORE, String.valueOf(score));
+                intent.putExtra(LEVEL, String.valueOf(numStars));
                 startActivity(intent);
             }
         });
@@ -73,14 +75,14 @@ public class GameActivity extends AppCompatActivity {
         if(color!=0)
             if (init)
             {
-                if (color == adapter.getColor(position - 1) || color == adapter.getColor(position + 1)
-                        || color == adapter.getColor(position - numColumn) || color == adapter.getColor(position + numColumn)){
-                    click(position, color, adapter, num);
-                }
-                else {
-                    score -= 100;
-                    updateScore();
-                }
+                    if(!alone(position,adapter))
+                        click(position, color, adapter, num);
+
+                    else {
+                        score -= 100;
+                        updateScore();
+                    }
+
             }
             else
                 click(position, color, adapter,num);
@@ -142,8 +144,53 @@ public class GameActivity extends AppCompatActivity {
         adapter.notifyDataSetChanged();
         score = score+(num*10);
         updateScore();
+        if(isFinished(adapter)){
+            Toast toast = Toast.makeText(getApplicationContext(), "End", Toast.LENGTH_SHORT);
+            toast.show();
+        }
     }
+
+    private boolean isFinished(ImageAdapter adapter) {
+        for(int i = 0;i<numColumn*numColumn;i++)
+            if(alone(i,adapter))
+                return false;
+
+
+
+        return true;
+    }
+
+    private boolean alone(int position, ImageAdapter adapter) {
+        if (adapter.getColor(position) != 0) {
+            int color = adapter.getColor(position);
+            if (position % numColumn != 0) {
+                if (color == adapter.getColor(position - 1)) {
+                    return false;
+                }
+            }
+            if (position % numColumn != numColumn - 1) {
+                if (color == adapter.getColor(position + 1)) {
+                    return false;
+                }
+            }
+            if (position > numColumn) {
+                if (color == adapter.getColor(position - numColumn)) {
+                    return false;
+                }
+            }
+            if (position < Math.pow(numColumn, 2) - numColumn) {
+                if (color == adapter.getColor(position + numColumn)) {
+                    return false;
+                }
+            }
+        }
+        return true;
+
+    }
+
     private void updateScore(){
         scoreTextview.setText(String.valueOf(score));
     }
 }
+
+

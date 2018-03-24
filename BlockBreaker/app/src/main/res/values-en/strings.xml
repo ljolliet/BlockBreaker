@@ -4,5 +4,9 @@
     <string name="buttonPlay">Play</string>
     <string name="game_name">BLOCK BREAKER</string>
     <string name="score">Score :</string>
-    <string name="scoreButton">SCore</string>
+    <string name="scoreButton">Score</string>
+    <string name="level">level</string>
+    <string name="scores">scores</string>
+    <string name="retour">Restart</string>
+    <string name="bestScore">Best Score :</string>
 </resources>
