@@ -75,13 +75,13 @@ public class GameActivity extends AppCompatActivity {
         if(color!=0)
             if (init)
             {
-                    if(!alone(position,adapter))
-                        click(position, color, adapter, num);
+                if(!alone(position,adapter))
+                    click(position, color, adapter, num);
 
-                    else {
-                        score -= 100;
-                        updateScore();
-                    }
+                else {
+                    score -= 100;
+                    updateScore();
+                }
 
             }
             else
@@ -92,18 +92,23 @@ public class GameActivity extends AppCompatActivity {
 
 
     private void offset(int position,ImageAdapter adapter) {
-        if(position % numColumn != numColumn - 1 && position > 0 && position % numColumn != 0){
+        if (position % numColumn != numColumn - 1 && position > 0 && position % numColumn != 0) {
             adapter.setColor(position, adapter.getColor(position + 1));
-            adapter.setColor(position+1, 0);
+            adapter.setColor(position + 1, 0);
             offset(position - numColumn, adapter);
             adapter.notifyDataSetChanged();
-            /*if(position-1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position-1)==0)
-                offset(position-1,adapter);*/
-            if(position+1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position+1)==0)
-                offset(position+1,adapter);
-        }
+            if (position + 1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position + 1) == 0)
+                offset(position + 1, adapter);
 
+          /*  if(position-1 >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position-1)==0)
+                offset(position-1,adapter);*/
+
+        }
     }
+
+
+
+
 
     private void gravity(int position,ImageAdapter adapter) {
         if(position<numColumn)
@@ -140,19 +145,31 @@ public class GameActivity extends AppCompatActivity {
         }
         gravity(position, adapter);
         if (position >= Math.pow(numColumn, 2) - numColumn && adapter.getColor(position) == 0)
+        {
             offset(position, adapter);
-        adapter.notifyDataSetChanged();
+            checkOffSet(position, adapter);
+        }
+
+            adapter.notifyDataSetChanged();
         score = score+(num*10);
         updateScore();
         if(isFinished(adapter)){
             Toast toast = Toast.makeText(getApplicationContext(), "End", Toast.LENGTH_SHORT);
             toast.show();
+
         }
+    }
+
+    private void checkOffSet(int position, ImageAdapter adapter) {
+        if(adapter.getColor(position)==0 && adapter.getColor(position-numColumn)!=0)
+            gravity(position,adapter);
+        if(adapter.getColor(position)==0 && adapter.getColor(position+1)!=0)
+            offset(position,adapter);
     }
 
     private boolean isFinished(ImageAdapter adapter) {
         for(int i = 0;i<numColumn*numColumn;i++)
-            if(alone(i,adapter))
+            if(!(alone(i,adapter)))
                 return false;
 
 

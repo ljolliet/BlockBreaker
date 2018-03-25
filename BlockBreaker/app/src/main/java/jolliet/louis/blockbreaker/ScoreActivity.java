@@ -75,19 +75,20 @@ public class ScoreActivity extends AppCompatActivity {
 
 
         SharedPreferences settings = getSharedPreferences("PREF", 0);
-        int id=0;
-        int allLevel =1;
-        while(settings.getString(allLevel+"key"+id, null)!=null){
-            levelScores.get(allLevel).add(Integer.valueOf(settings.getString(allLevel+"key"+id, null)));
-            id++;
-            if(allLevel<numLevel)
-                allLevel++;
-            else
-                break;
+
+        for(int lev = 1; lev<=numLevel;lev++) {
+            int id=0;
+            while (settings.getString(lev + "key" + id, null) != null) {
+                levelScores.get(lev).add(Integer.valueOf(settings.getString(lev + "key" + id, null)));
+                id++;
+            }
+
         }
 
-        Collections.sort(levelScores.get(level));
-        Collections.reverse(levelScores.get(level));
+        for(ArrayList a : levelScores) {
+            Collections.sort(a);
+            Collections.reverse(a);
+        }
         for(int i=0;i<nbScore;i++)
         {
             currentList.add(num[i]+ levelScores.get(level).get(i));
@@ -99,7 +100,6 @@ public class ScoreActivity extends AppCompatActivity {
     protected void onStop() {
 
         super.onStop();
-        save();
     }
 
     private void save() {
