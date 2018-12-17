@@ -1,9 +1,0 @@
-<resources>
-    <string name="app_name">Ex11</string>
-    <string name="search">Search</string>
-    <string name="flipH">Flip horizontally </string>
-    <string name="flipV">Flip vertically</string>
-    <string name="click">   Try to click</string>
-    <string name="flipBW"><![CDATA[Flip to Black & White]]></string>
-    <string name="InvertC">Invert Colors</string>
-</resources>
